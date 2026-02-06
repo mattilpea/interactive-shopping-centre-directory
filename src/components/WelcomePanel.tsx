@@ -4,10 +4,14 @@ type Props = {
   title: string
   subtitle: string
   helpTitle: string
-  helpSteps: string[]
+  helpSteps: readonly string[]
   helpButtonLabel: string
   helpPanelTitle: string
-  helpSections: { title: string; body?: string; items?: string[] }[]
+  helpSections: readonly {
+    title: string
+    body?: string
+    items?: readonly string[]
+  }[]
 }
 
 export default function WelcomePanel({
