@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useMemo, useRef } from "react"
 
 type Options = {
   enabled: boolean
@@ -7,15 +7,14 @@ type Options = {
 
 export function useAudioFeedback({ enabled, volume = 0.4 }: Options) {
   const audioRef = useRef<HTMLAudioElement | null>(null)
-  const [ready, setReady] = useState(false)
+
+  const canPlay = useMemo(() => enabled && !!audioRef.current, [enabled])
 
   useEffect(() => {
-    const src = new URL("sounds/click.mp3", import.meta.env.BASE_URL).toString()
-    const a = new Audio(src)
+    const a = new Audio("/sounds/click.mp3")
     a.preload = "auto"
     a.volume = volume
     audioRef.current = a
-    setReady(true)
   }, [volume])
 
   const playClick = () => {
@@ -25,8 +24,6 @@ export function useAudioFeedback({ enabled, volume = 0.4 }: Options) {
     a.currentTime = 0
     a.play().catch((err) => console.log("play blocked:", err))
   }
-
-  const canPlay = enabled && ready
 
   return { playClick, canPlay }
 }
