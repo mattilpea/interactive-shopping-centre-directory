@@ -3,7 +3,7 @@ import CategoryCard from "./CategoryCard"
 type Category = { label: string; icon: string }
 
 type Props = {
-  categories: Category[]
+  categories: readonly Category[]
   onSelectCategory?: (label: string) => void
 }
 

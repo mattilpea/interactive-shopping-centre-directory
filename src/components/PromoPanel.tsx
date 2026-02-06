@@ -7,9 +7,9 @@ type Offer = {
 
 type Props = {
   header: string
-  offers: Offer[]
+  offers: readonly Offer[]
   promotionsTitle: string
-  promotions: string[]
+  promotions: readonly string[]
 }
 
 export default function PromoPanel({
