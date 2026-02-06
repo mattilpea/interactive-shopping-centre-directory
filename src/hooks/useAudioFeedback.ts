@@ -10,7 +10,8 @@ export function useAudioFeedback({ enabled, volume = 0.4 }: Options) {
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    const a = new Audio("/sounds/click.mp3")
+    const src = new URL("sounds/click.mp3", import.meta.env.BASE_URL).toString()
+    const a = new Audio(src)
     a.preload = "auto"
     a.volume = volume
     audioRef.current = a
